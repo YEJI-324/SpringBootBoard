@@ -4,12 +4,7 @@ import com.example.testboard.entity.Board;
 import com.example.testboard.service.BoardService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.*;
 
 
 @Slf4j
@@ -18,7 +13,6 @@ import java.util.List;
 public class BoardController {
 
     private final BoardService boardService;
-//    private final BoardRepository boardRepository;
 
     @Autowired
     public BoardController(BoardService boardService) {
@@ -30,23 +24,22 @@ public class BoardController {
     public Object ReadAll(@PathVariable("boardNo") int boardNo) {
         if (boardNo != 0) {
             // 상세 조회
-            return boardService.getBoardDetail(boardNo);
+            return boardService.getBoard(boardNo);
         } else {
             // 전체 조회
-            // TODO: 2022-09-19 페이징 처리 필요
-            return boardService.getAllBoard();
+            return boardService.getBoards();
         }
     }
 
     // 추가
-    // TODO: 2022-09-19 form data로 변경 필요
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public void registerBoard(Board board) {
-//        return board;
+    public String registerBoard(String title, String content, int category) {
+        System.out.println("Reqeust\ntitle : " + title + "content : " + content + "category : " + category);
+        boardService.registerBoard(title, content, category);
+        return "Success";
     }
 
     // 수정
-    // TODO: 2022-09-19 form data로 변경 필요
     @RequestMapping(value = "/modify", method = RequestMethod.PUT)
     public Board modifyBoard(Board board) {
         return board;

@@ -1,6 +1,8 @@
 package com.example.testboard.service;
 
 import com.example.testboard.entity.Board;
+import com.example.testboard.mapper.BoardMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -8,11 +10,22 @@ import java.util.List;
 @Service
 public class BoardService {
 
-    public List<Board> getAllBoard() {
-        return null;
+    private final BoardMapper boardMapper;
+
+    @Autowired
+    public BoardService(BoardMapper boardMapper) {
+        this.boardMapper = boardMapper;
     }
 
-    public Object getBoardDetail(int boardNo) {
-        return null;
+    public List<Board> getBoards() {
+        return boardMapper.getBoards();
+    }
+
+    public Board getBoard(int boardNo) {
+        return boardMapper.getBoard(boardNo);
+    }
+
+    public void registerBoard(String title, String content, int category) {
+        boardMapper.registerBoard(title, content, category);
     }
 }
