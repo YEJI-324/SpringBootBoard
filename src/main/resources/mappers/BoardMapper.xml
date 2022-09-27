@@ -4,12 +4,16 @@
 <mapper namespace="com.example.testboard.mapper.BoardMapper">
 
     <select id="getBoards" resultType="com.example.testboard.entity.Board">
-        SELECT *
+        SELECT id, title, content, category, cnt,
+               date_format(reg_date, '%Y-%m-%d %H:%i:%s') as regDate,
+               date_format(mod_date, '%Y-%m-%d %H:%i:%s') as modDate
         FROM tb_board
     </select>
 
     <select id="getBoard" resultType="com.example.testboard.entity.Board">
-        SELECT *
+        SELECT id, title, content, category, cnt,
+               date_format(reg_date, '%Y-%m-%d %H:%i:%s') as regDate,
+               date_format(mod_date, '%Y-%m-%d %H:%i:%s') as modDate
         FROM tb_board
         WHERE id = #{boardNo}
     </select>

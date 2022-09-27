@@ -12,6 +12,6 @@ public class Board {
     private String content;
     private int category;
     private int cnt;
-    private Date reg_date;
-    private Date mod_date;
+    private String regDate;
+    private String modDate;
 }
